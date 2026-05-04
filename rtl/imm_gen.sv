@@ -1,4 +1,4 @@
-//// instruction memort generation
+//// immediate generator
 
 module imm_gen (
   input  logic [31:0] instr,

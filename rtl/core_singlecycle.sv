@@ -27,6 +27,35 @@ module core_singlecycle (
 
     // EX
     logic [31:0] dmem_rdata;
+    logic [2:0]  funct3;
+    assign funct3 = instr[14:12];
+
+    // byte enables: generated from funct3 size and byte offset in addr
+    logic [3:0] dmem_be;
+    always_comb begin
+        if (memwrite) begin
+            case (funct3[1:0])
+                2'b00:   dmem_be = 4'b0001 << alu_y[1:0];          // sb
+                2'b01:   dmem_be = 4'b0011 << {alu_y[1], 1'b0};    // sh
+                default: dmem_be = 4'b1111;                          // sw
+            endcase
+        end else begin
+            dmem_be = 4'b0000;
+        end
+    end
+
+    // load sign-extension / extraction
+    logic [31:0] load_data;
+    always_comb begin
+        case (funct3)
+            3'b000: load_data = {{24{dmem_rdata[7]}},  dmem_rdata[7:0]};    // lb
+            3'b001: load_data = {{16{dmem_rdata[15]}}, dmem_rdata[15:0]};   // lh
+            3'b010: load_data = dmem_rdata;                                   // lw
+            3'b100: load_data = {24'h0, dmem_rdata[7:0]};                   // lbu
+            3'b101: load_data = {16'h0, dmem_rdata[15:0]};                  // lhu
+            default: load_data = dmem_rdata;
+        endcase
+    end
 
     // Instances
     imem u_imem(.addr(pc), .rdata(instr));
@@ -49,7 +78,7 @@ module core_singlecycle (
 
     alu u_alu(.a(rs1_val), .b(alu_b), .alu_ctrl(alu_ctrl), .y(alu_y), .zero(alu_zero));
 
-    dmem u_dmem(.clk(clk), .we(mewrite), .re(memread), .addr(alu_y), .wdata(rs2_val), .rdata(dmem_rdata));
+    dmem u_dmem(.clk(clk), .be(dmem_be), .re(memread), .addr(alu_y), .wdata(rs2_val), .rdata(dmem_rdata));
 
     // WB mux
     always_comb begin
