@@ -299,6 +299,10 @@ end
 // ─────────────────────────────────────────────────────────────────
 // Hazard unit
 // ─────────────────────────────────────────────────────────────────
+// JAL resolved here in ID (1-cycle penalty); JALR resolved in EX (2-cycle)
+logic jal_id;
+assign jal_id = id_jump && !id_jalr;
+
 hazard_unit u_hazard (
     .id_ex_rs1       (id_ex_rs1),      .id_ex_rs2       (id_ex_rs2),
     .ex_mem_rd       (ex_mem_rd),      .ex_mem_regwrite  (ex_mem_regwrite),
@@ -306,7 +310,8 @@ hazard_unit u_hazard (
     .id_ex_rd        (id_ex_rd),       .id_ex_memread    (id_ex_memread),
     .if_id_rs1       (id_rs1),         .if_id_rs2        (id_rs2),
     .branch_taken    (ex_branch_taken),
-    .jump_ex         (id_ex_jump),     // covers both JAL and JALR
+    .jal_id          (jal_id),         // JAL: 1-cycle flush
+    .jalr_ex         (id_ex_jalr),     // JALR: 2-cycle flush
     .forwardA        (forwardA),       .forwardB         (forwardB),
     .pc_stall        (pc_stall),
     .if_id_stall     (if_id_stall),    .if_id_flush      (if_id_flush),
@@ -318,7 +323,7 @@ hazard_unit u_hazard (
 // ─────────────────────────────────────────────────────────────────
 always_comb begin
     if      (id_ex_jalr)       pc_next = {ex_alu_y[31:1], 1'b0};   // JALR: (rs1+imm_i)&~1
-    else if (id_ex_jump)       pc_next = id_ex_pc + id_ex_imm_j;   // JAL:  PC+imm_j
+    else if (jal_id)           pc_next = if_id_pc + id_imm_j;      // JAL resolved in ID
     else if (ex_branch_taken)  pc_next = id_ex_pc + id_ex_imm_b;   // BRANCH
     else                       pc_next = pc + 32'd4;
 end
@@ -327,5 +332,49 @@ always_ff @(posedge clk) begin
     if      (!rst_n)    pc <= 32'h0;
     else if (!pc_stall) pc <= pc_next;
 end
+
+// ─────────────────────────────────────────────────────────────────
+// SVA Assertions
+// ─────────────────────────────────────────────────────────────────
+`ifdef SIMULATION
+    // PC must always be word-aligned
+    property pc_aligned;
+        @(posedge clk) disable iff (!rst_n) pc[1:0] == 2'b00;
+    endproperty
+    assert property (pc_aligned)
+        else $error("PC misaligned: %08h", pc);
+
+    // When stalled, PC must not advance
+    property pc_holds_on_stall;
+        @(posedge clk) disable iff (!rst_n) pc_stall |=> (pc == $past(pc));
+    endproperty
+    assert property (pc_holds_on_stall)
+        else $error("PC advanced during stall: was %08h now %08h", $past(pc), pc);
+
+    // x0 writeback must never carry a non-zero value
+    property x0_immutable;
+        @(posedge clk) disable iff (!rst_n)
+            (wb_regwrite && wb_rd == 5'h0) |-> (wb_data == 32'h0);
+    endproperty
+    assert property (x0_immutable)
+        else $error("x0 writeback with non-zero data: %08h", wb_data);
+
+    // Load-use stall: ID/EX must become a bubble the cycle after stall
+    property load_use_bubble;
+        @(posedge clk) disable iff (!rst_n)
+            (id_ex_memread && (id_ex_rd != 5'h0) &&
+             (id_ex_rd == id_rs1 || id_ex_rd == id_rs2))
+            |=> (id_ex_regwrite == 1'b0 && id_ex_memwrite == 1'b0);
+    endproperty
+    assert property (load_use_bubble)
+        else $error("Load-use stall did not insert bubble into ID/EX");
+
+    // EX/MEM and MEM/WB rd must never be X after reset
+    property no_x_rd;
+        @(posedge clk) disable iff (!rst_n) !$isunknown(ex_mem_rd);
+    endproperty
+    assert property (no_x_rd)
+        else $error("X value in ex_mem_rd");
+`endif
 
 endmodule

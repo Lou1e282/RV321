@@ -1,0 +1,12 @@
+# vsim -c axi_lite_regs_tb -do "run -all; quit" 
+# Start time: 13:28:22 on May 16,2026
+# Loading sv_std.std
+# Loading work.axi_lite_regs_tb
+# Loading work.axi_lite_regs
+# run -all
+# [ OK ] read 0x00 = 12345678
+# [ OK ] read 0x18 after byte write = aabbccee
+# ** Note: $finish    : rtl/IO/axi_lite_regs_tb.sv(165)
+#    Time: 275 ps  Iteration: 1  Instance: /axi_lite_regs_tb
+# End time: 13:28:22 on May 16,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0

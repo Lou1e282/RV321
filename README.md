@@ -57,6 +57,20 @@ tb_pipeline.sv            # testbench for pipeline core
 
 Load memories and run in QuestaSim or any SystemVerilog simulator:
 
+Unit tests for the standalone RTL building blocks:
+
+```tcl
+vsim -do "
+  vlog rtl/alu.sv rtl/regfile.sv rtl/imem.sv rtl/dmem.sv \
+       rtl/imm_gen.sv rtl/decoder.sv rtl/pipeline/hazard_unit.sv \
+       tb_units.sv
+  vsim tb_units
+  run -all
+"
+```
+
+Pipeline program test:
+
 ```tcl
 vsim -do "
   vlog rtl/alu.sv rtl/regfile.sv rtl/imem.sv rtl/dmem.sv \

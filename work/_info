@@ -1,0 +1,344 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/louie/RV321
+valu
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z2 !s110 1778795380
+!i10b 1
+!s100 Y`J`][EZamK:mB]U8bH]a3
+IfBbaYoaY@BAagaOKDMbF?0
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+!s105 alu_sv_unit
+S1
+R0
+w1777922007
+8rtl/alu.sv
+Frtl/alu.sv
+L0 6
+Z4 OV;L;10.5c;63
+r1
+!s85 0
+31
+Z5 !s108 1778795380.000000
+Z6 !s107 rtl/IO/rv321_axi_lite_top.sv|rtl/IO/axi_lite_regs.sv|rtl/pipeline/core_pipeline.sv|rtl/pipeline/hazard_unit.sv|rtl/decoder.sv|rtl/imm_gen.sv|rtl/dmem.sv|rtl/imem.sv|rtl/regfile.sv|rtl/alu.sv|
+Z7 !s90 -sv|rtl/alu.sv|rtl/regfile.sv|rtl/imem.sv|rtl/dmem.sv|rtl/imm_gen.sv|rtl/decoder.sv|rtl/pipeline/hazard_unit.sv|rtl/pipeline/core_pipeline.sv|rtl/IO/axi_lite_regs.sv|rtl/IO/rv321_axi_lite_top.sv|
+!i113 1
+o-sv
+Z8 tCvgOpt 0
+vaxi_lite_regs
+R1
+Z9 !s110 1778963298
+!i10b 1
+!s100 iIGa<PP:i1d^o3RX>[50R2
+ISf6@NW<_[kKR>d0Y8JUNG3
+R3
+!s105 axi_lite_regs_sv_unit
+S1
+R0
+w1778963291
+8rtl/IO/axi_lite_regs.sv
+Frtl/IO/axi_lite_regs.sv
+L0 6
+R4
+r1
+!s85 0
+31
+Z10 !s108 1778963298.000000
+Z11 !s107 rtl/IO/axi_lite_regs_tb.sv|rtl/IO/axi_lite_regs.sv|
+Z12 !s90 -sv|rtl/IO/axi_lite_regs.sv|rtl/IO/axi_lite_regs_tb.sv|
+!i113 1
+o-sv
+R8
+vaxi_lite_regs_tb
+R1
+R9
+!i10b 1
+!s100 iM_`hl[EJlWX[DeGOK4GC3
+I^Jz[5f]8Nj2z2o^53HmNZ1
+R3
+!s105 axi_lite_regs_tb_sv_unit
+S1
+R0
+w1778963273
+8rtl/IO/axi_lite_regs_tb.sv
+Frtl/IO/axi_lite_regs_tb.sv
+L0 3
+R4
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 1
+o-sv
+R8
+vcore_pipeline
+R1
+R2
+!i10b 1
+!s100 i;IUbNTeIoY`ejEkKG8?E2
+I1^f^DDcXR7KPZhI=cgW7V1
+R3
+!s105 core_pipeline_sv_unit
+S1
+R0
+w1778263506
+8rtl/pipeline/core_pipeline.sv
+Frtl/pipeline/core_pipeline.sv
+L0 4
+R4
+r1
+!s85 0
+31
+R5
+R6
+R7
+!i113 1
+o-sv
+R8
+vdecoder
+R1
+R2
+!i10b 1
+!s100 g=T7dDFb?n<EMR[mh9;nZ2
+IF5Zm_:6A4:X6G?]g]L17H3
+R3
+!s105 decoder_sv_unit
+S1
+R0
+w1777922093
+8rtl/decoder.sv
+Frtl/decoder.sv
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R6
+R7
+!i113 1
+o-sv
+R8
+vdmem
+R1
+R2
+!i10b 1
+!s100 Te2NDeRR1f3IflTcjjXA>2
+ICRfXBdbVHd9hBO]IO[;H61
+R3
+!s105 dmem_sv_unit
+S1
+R0
+w1777533227
+8rtl/dmem.sv
+Frtl/dmem.sv
+L0 4
+R4
+r1
+!s85 0
+31
+R5
+R6
+R7
+!i113 1
+o-sv
+R8
+vfpga_top
+R1
+!s110 1778263550
+!i10b 1
+!s100 08X=[eG@ZJYc0SF9n^8dR2
+I^mRcl^1J1n>mo5<k5ekN32
+R3
+!s105 fpga_top_sv_unit
+S1
+R0
+w1778263509
+8rtl\fpga_top.sv
+Frtl\fpga_top.sv
+L0 7
+R4
+r1
+!s85 0
+31
+!s108 1778263549.000000
+!s107 rtl\fpga_top.sv|rtl\pipeline\core_pipeline.sv|rtl\pipeline\hazard_unit.sv|rtl\decoder.sv|rtl\imm_gen.sv|rtl\dmem.sv|rtl\imem.sv|rtl\regfile.sv|rtl\alu.sv|
+!s90 rtl\alu.sv|rtl\regfile.sv|rtl\imem.sv|rtl\dmem.sv|rtl\imm_gen.sv|rtl\decoder.sv|rtl\pipeline\hazard_unit.sv|rtl\pipeline\core_pipeline.sv|rtl\fpga_top.sv|
+!i113 1
+R8
+vhazard_unit
+R1
+R2
+!i10b 1
+!s100 Ug@HmSl[?U6>VikQNhDK`0
+I7?ObbL>a>T7a?I^3^4Nml0
+R3
+!s105 hazard_unit_sv_unit
+S1
+R0
+w1777941900
+8rtl/pipeline/hazard_unit.sv
+Frtl/pipeline/hazard_unit.sv
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R6
+R7
+!i113 1
+o-sv
+R8
+vimem
+R1
+R2
+!i10b 1
+!s100 U;7`[:ffnF7IQKelF]VHb0
+I;jBkPR7A3c=oMbIQSgJkZ0
+R3
+!s105 imem_sv_unit
+S1
+R0
+w1778263501
+8rtl/imem.sv
+Frtl/imem.sv
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R6
+R7
+!i113 1
+o-sv
+R8
+vimm_gen
+R1
+R2
+!i10b 1
+!s100 1AimC?1C_`:`NF_R08?OJ2
+I6`OhEdEl>k4_0[m38CKbZ0
+R3
+!s105 imm_gen_sv_unit
+S1
+R0
+w1777696407
+8rtl/imm_gen.sv
+Frtl/imm_gen.sv
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R6
+R7
+!i113 1
+o-sv
+R8
+vregfile
+R1
+R2
+!i10b 1
+!s100 5PRiIh[DJoPi:;WL_5UD]3
+IhYjPHgXNV`F2LXX8MWX5^0
+R3
+!s105 regfile_sv_unit
+S1
+R0
+w1777532264
+8rtl/regfile.sv
+Frtl/regfile.sv
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R6
+R7
+!i113 1
+o-sv
+R8
+vrv321_axi_lite_top
+R1
+R2
+!i10b 1
+!s100 F89g3LMP3BGFI;Ca7RlLN0
+I1i<FbMbXYJ06^H_Bme9]F2
+R3
+!s105 rv321_axi_lite_top_sv_unit
+S1
+R0
+w1778795363
+8rtl/IO/rv321_axi_lite_top.sv
+Frtl/IO/rv321_axi_lite_top.sv
+L0 13
+R4
+r1
+!s85 0
+31
+R5
+R6
+R7
+!i113 1
+o-sv
+R8
+vtb_pipeline
+R1
+!s110 1778011736
+!i10b 1
+!s100 J1ALGbI6U=19L?W1_0_Kc3
+IUc:08BZUZn]PO5n1FYn?P2
+R3
+!s105 tb_pipeline_sv_unit
+S1
+R0
+w1778011732
+8tb_pipeline.sv
+Ftb_pipeline.sv
+L0 7
+R4
+r1
+!s85 0
+31
+!s108 1778011736.000000
+!s107 tb_pipeline.sv|rtl\pipeline\core_pipeline.sv|rtl\pipeline\hazard_unit.sv|rtl\decoder.sv|rtl\imm_gen.sv|rtl\dmem.sv|rtl\imem.sv|rtl\regfile.sv|rtl\alu.sv|
+!s90 +define+SIMULATION|rtl\alu.sv|rtl\regfile.sv|rtl\imem.sv|rtl\dmem.sv|rtl\imm_gen.sv|rtl\decoder.sv|rtl\pipeline\hazard_unit.sv|rtl\pipeline\core_pipeline.sv|tb_pipeline.sv|
+!i113 1
+!s92 +define+SIMULATION
+R8
+vtb_units
+R1
+!s110 1777923120
+!i10b 1
+!s100 ;RFd8BQ@[;loO3Dm7PY5H3
+I?5bI7TdZU8zKXnTm?o]UY1
+R3
+!s105 tb_units_sv_unit
+S1
+R0
+w1777923111
+8tb_units.sv
+Ftb_units.sv
+L0 3
+R4
+r1
+!s85 0
+31
+!s108 1777923119.000000
+!s107 tb_units.sv|rtl\pipeline\hazard_unit.sv|rtl\decoder.sv|rtl\imm_gen.sv|rtl\dmem.sv|rtl\imem.sv|rtl\regfile.sv|rtl\alu.sv|
+!s90 rtl\alu.sv|rtl\regfile.sv|rtl\imem.sv|rtl\dmem.sv|rtl\imm_gen.sv|rtl\decoder.sv|rtl\pipeline\hazard_unit.sv|tb_units.sv|
+!i113 1
+R8
