@@ -16,8 +16,13 @@ module regfile (
 
 ///comb read
 always_comb begin
-        rd1 = (ra1 == 0) ? 32'h0 : regs[ra1];
-        rd2 = (ra2 == 0) ? 32'h0 : regs[ra2];
+        if (ra1 == 0) rd1 = 32'h0;
+        else if (we && (wa == ra1)) rd1 = wd;
+        else rd1 = regs[ra1];
+
+        if (ra2 == 0) rd2 = 32'h0;
+        else if (we && (wa == ra2)) rd2 = wd;
+        else rd2 = regs[ra2];
 end
 
 // synched write

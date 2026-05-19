@@ -1,7 +1,10 @@
 // 5-stage RV32I pipeline: IF → ID → EX → MEM → WB
 // Hazards: full EX-EX / MEM-EX forwarding, load-use stall, branch/jump flush
 
-module core_pipeline (
+module core_pipeline #(
+    parameter string IMEM_FILE = "os/kernel.hex",
+    parameter string DMEM_FILE = "os/kernel.hex"
+)(
     input logic clk,
     input logic rst_n
 );
@@ -20,7 +23,9 @@ logic [31:0] pc, pc_next;
 logic [31:0] if_instr;
 logic        pc_stall;
 
-imem u_imem (
+imem #(
+    .MEMFILE(IMEM_FILE)
+) u_imem (
     .addr  (pc),
     .rdata (if_instr)
 );
@@ -239,7 +244,9 @@ end
 // ─────────────────────────────────────────────────────────────────
 logic [31:0] mem_rdata, mem_load_data;
 
-dmem u_dmem (
+dmem #(
+    .MEMFILE(DMEM_FILE)
+) u_dmem (
     .clk   (clk),
     .be    (ex_mem_be),
     .re    (ex_mem_memread),
@@ -248,14 +255,34 @@ dmem u_dmem (
     .rdata (mem_rdata)
 );
 
-// Load sign/zero extension from funct3
+// Load sign/zero extension from funct3 and byte address offset.
 always_comb begin
     case (ex_mem_funct3)
-        3'b000:  mem_load_data = {{24{mem_rdata[7]}},  mem_rdata[7:0]};    // LB
-        3'b001:  mem_load_data = {{16{mem_rdata[15]}}, mem_rdata[15:0]};   // LH
+        3'b000: begin
+            case (ex_mem_alu_y[1:0])
+                2'd0: mem_load_data = {{24{mem_rdata[7]}},  mem_rdata[7:0]};
+                2'd1: mem_load_data = {{24{mem_rdata[15]}}, mem_rdata[15:8]};
+                2'd2: mem_load_data = {{24{mem_rdata[23]}}, mem_rdata[23:16]};
+                2'd3: mem_load_data = {{24{mem_rdata[31]}}, mem_rdata[31:24]};
+            endcase
+        end
+        3'b001: begin
+            if (ex_mem_alu_y[1]) mem_load_data = {{16{mem_rdata[31]}}, mem_rdata[31:16]};
+            else                 mem_load_data = {{16{mem_rdata[15]}}, mem_rdata[15:0]};
+        end
         3'b010:  mem_load_data = mem_rdata;                                  // LW
-        3'b100:  mem_load_data = {24'h0, mem_rdata[7:0]};                  // LBU
-        3'b101:  mem_load_data = {16'h0, mem_rdata[15:0]};                 // LHU
+        3'b100: begin
+            case (ex_mem_alu_y[1:0])
+                2'd0: mem_load_data = {24'h0, mem_rdata[7:0]};
+                2'd1: mem_load_data = {24'h0, mem_rdata[15:8]};
+                2'd2: mem_load_data = {24'h0, mem_rdata[23:16]};
+                2'd3: mem_load_data = {24'h0, mem_rdata[31:24]};
+            endcase
+        end
+        3'b101: begin
+            if (ex_mem_alu_y[1]) mem_load_data = {16'h0, mem_rdata[31:16]};
+            else                 mem_load_data = {16'h0, mem_rdata[15:0]};
+        end
         default: mem_load_data = mem_rdata;
     endcase
 end

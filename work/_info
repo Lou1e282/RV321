@@ -10,25 +10,25 @@ cModel Technology
 Z0 dC:/Users/louie/RV321
 valu
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1778795380
+Z2 !s110 1779056830
 !i10b 1
 !s100 Y`J`][EZamK:mB]U8bH]a3
-IfBbaYoaY@BAagaOKDMbF?0
+I:OhAEz]D2`EE3o:2JiiDX1
 Z3 VDg1SIo80bB@j0V0VzS_@n1
 !s105 alu_sv_unit
 S1
 R0
 w1777922007
-8rtl/alu.sv
-Frtl/alu.sv
+8rtl\alu.sv
+Frtl\alu.sv
 L0 6
 Z4 OV;L;10.5c;63
 r1
 !s85 0
 31
-Z5 !s108 1778795380.000000
-Z6 !s107 rtl/IO/rv321_axi_lite_top.sv|rtl/IO/axi_lite_regs.sv|rtl/pipeline/core_pipeline.sv|rtl/pipeline/hazard_unit.sv|rtl/decoder.sv|rtl/imm_gen.sv|rtl/dmem.sv|rtl/imem.sv|rtl/regfile.sv|rtl/alu.sv|
-Z7 !s90 -sv|rtl/alu.sv|rtl/regfile.sv|rtl/imem.sv|rtl/dmem.sv|rtl/imm_gen.sv|rtl/decoder.sv|rtl/pipeline/hazard_unit.sv|rtl/pipeline/core_pipeline.sv|rtl/IO/axi_lite_regs.sv|rtl/IO/rv321_axi_lite_top.sv|
+Z5 !s108 1779056830.000000
+Z6 !s107 tb_kernel.sv|rtl\pipeline\core_pipeline.sv|rtl\pipeline\hazard_unit.sv|rtl\imem.sv|rtl\dmem.sv|rtl\decoder.sv|rtl\imm_gen.sv|rtl\regfile.sv|rtl\alu.sv|
+Z7 !s90 -sv|rtl\alu.sv|rtl\regfile.sv|rtl\imm_gen.sv|rtl\decoder.sv|rtl\dmem.sv|rtl\imem.sv|rtl\pipeline\hazard_unit.sv|rtl\pipeline\core_pipeline.sv|tb_kernel.sv|
 !i113 1
 o-sv
 Z8 tCvgOpt 0
@@ -84,15 +84,15 @@ vcore_pipeline
 R1
 R2
 !i10b 1
-!s100 i;IUbNTeIoY`ejEkKG8?E2
-I1^f^DDcXR7KPZhI=cgW7V1
+!s100 [e;^6zbIW^;9b8PL>O8RC3
+INQgzB>o30=;lG_?4WoCJV0
 R3
 !s105 core_pipeline_sv_unit
 S1
 R0
-w1778263506
-8rtl/pipeline/core_pipeline.sv
-Frtl/pipeline/core_pipeline.sv
+w1779054472
+8rtl\pipeline\core_pipeline.sv
+Frtl\pipeline\core_pipeline.sv
 L0 4
 R4
 r1
@@ -109,14 +109,14 @@ R1
 R2
 !i10b 1
 !s100 g=T7dDFb?n<EMR[mh9;nZ2
-IF5Zm_:6A4:X6G?]g]L17H3
+I?C@nIFbVo?]K4PkGUV4I73
 R3
 !s105 decoder_sv_unit
 S1
 R0
 w1777922093
-8rtl/decoder.sv
-Frtl/decoder.sv
+8rtl\decoder.sv
+Frtl\decoder.sv
 L0 3
 R4
 r1
@@ -132,16 +132,16 @@ vdmem
 R1
 R2
 !i10b 1
-!s100 Te2NDeRR1f3IflTcjjXA>2
-ICRfXBdbVHd9hBO]IO[;H61
+!s100 lz2Bbn6JNn8k=PQ08=f7o3
+IMQh2GWNVR?hAXPf?oZ@:[0
 R3
 !s105 dmem_sv_unit
 S1
 R0
-w1777533227
-8rtl/dmem.sv
-Frtl/dmem.sv
-L0 4
+w1779054507
+8rtl\dmem.sv
+Frtl\dmem.sv
+L0 3
 R4
 r1
 !s85 0
@@ -180,14 +180,14 @@ R1
 R2
 !i10b 1
 !s100 Ug@HmSl[?U6>VikQNhDK`0
-I7?ObbL>a>T7a?I^3^4Nml0
+I0B9GIio;7bPn9oaaOI6ZN1
 R3
 !s105 hazard_unit_sv_unit
 S1
 R0
 w1777941900
-8rtl/pipeline/hazard_unit.sv
-Frtl/pipeline/hazard_unit.sv
+8rtl\pipeline\hazard_unit.sv
+Frtl\pipeline\hazard_unit.sv
 L0 3
 R4
 r1
@@ -203,15 +203,15 @@ vimem
 R1
 R2
 !i10b 1
-!s100 U;7`[:ffnF7IQKelF]VHb0
-I;jBkPR7A3c=oMbIQSgJkZ0
+!s100 H2;lc_3H0lmS_:51XmEd`0
+IlUQjLKIhLENbGdTchBb8g0
 R3
 !s105 imem_sv_unit
 S1
 R0
-w1778263501
-8rtl/imem.sv
-Frtl/imem.sv
+w1779040549
+8rtl\imem.sv
+Frtl\imem.sv
 L0 3
 R4
 r1
@@ -228,14 +228,14 @@ R1
 R2
 !i10b 1
 !s100 1AimC?1C_`:`NF_R08?OJ2
-I6`OhEdEl>k4_0[m38CKbZ0
+I<dO^3aVK`S^jA9RIAYEXj1
 R3
 !s105 imm_gen_sv_unit
 S1
 R0
 w1777696407
-8rtl/imm_gen.sv
-Frtl/imm_gen.sv
+8rtl\imm_gen.sv
+Frtl\imm_gen.sv
 L0 3
 R4
 r1
@@ -251,15 +251,15 @@ vregfile
 R1
 R2
 !i10b 1
-!s100 5PRiIh[DJoPi:;WL_5UD]3
-IhYjPHgXNV`F2LXX8MWX5^0
+!s100 <J75TS8H@QIJRzUdCf;2E0
+IX:Qi?MF534FRd2keb2adj3
 R3
 !s105 regfile_sv_unit
 S1
 R0
-w1777532264
-8rtl/regfile.sv
-Frtl/regfile.sv
+w1779040512
+8rtl\regfile.sv
+Frtl\regfile.sv
 L0 3
 R4
 r1
@@ -273,7 +273,7 @@ o-sv
 R8
 vrv321_axi_lite_top
 R1
-R2
+!s110 1778795380
 !i10b 1
 !s100 F89g3LMP3BGFI;Ca7RlLN0
 I1i<FbMbXYJ06^H_Bme9]F2
@@ -289,23 +289,71 @@ R4
 r1
 !s85 0
 31
+!s108 1778795380.000000
+!s107 rtl/IO/rv321_axi_lite_top.sv|rtl/IO/axi_lite_regs.sv|rtl/pipeline/core_pipeline.sv|rtl/pipeline/hazard_unit.sv|rtl/decoder.sv|rtl/imm_gen.sv|rtl/dmem.sv|rtl/imem.sv|rtl/regfile.sv|rtl/alu.sv|
+!s90 -sv|rtl/alu.sv|rtl/regfile.sv|rtl/imem.sv|rtl/dmem.sv|rtl/imm_gen.sv|rtl/decoder.sv|rtl/pipeline/hazard_unit.sv|rtl/pipeline/core_pipeline.sv|rtl/IO/axi_lite_regs.sv|rtl/IO/rv321_axi_lite_top.sv|
+!i113 1
+o-sv
+R8
+vtb_kernel
+R1
+R2
+!i10b 1
+!s100 FekQ:X0>06]=Hn<]@L=>00
+INXa[HzglG:2z8ZP_YUa>92
+R3
+!s105 tb_kernel_sv_unit
+S1
+R0
+w1779054491
+8tb_kernel.sv
+Ftb_kernel.sv
+L0 3
+R4
+r1
+!s85 0
+31
 R5
 R6
 R7
 !i113 1
 o-sv
 R8
+vtb_load_use
+R1
+!s110 1779054518
+!i10b 1
+!s100 JLmXj8^5gb7]:=GM2ce<00
+I@VejZ6fLCH?<i4aij2B[32
+R3
+!s105 tb_load_use_sv_unit
+S1
+R0
+w1779054495
+8tb_load_use.sv
+Ftb_load_use.sv
+L0 3
+R4
+r1
+!s85 0
+31
+!s108 1779054518.000000
+!s107 tb_load_use.sv|rtl\pipeline\core_pipeline.sv|rtl\pipeline\hazard_unit.sv|rtl\imem.sv|rtl\dmem.sv|rtl\decoder.sv|rtl\imm_gen.sv|rtl\regfile.sv|rtl\alu.sv|
+!s90 -sv|rtl\alu.sv|rtl\regfile.sv|rtl\imm_gen.sv|rtl\decoder.sv|rtl\dmem.sv|rtl\imem.sv|rtl\pipeline\hazard_unit.sv|rtl\pipeline\core_pipeline.sv|tb_load_use.sv|
+!i113 1
+o-sv
+R8
 vtb_pipeline
 R1
-!s110 1778011736
+!s110 1779054546
 !i10b 1
-!s100 J1ALGbI6U=19L?W1_0_Kc3
-IUc:08BZUZn]PO5n1FYn?P2
+!s100 UNE?_Z:;ZUEm`c0N7T>cA2
+IGQjQY56b@I7BZg^VLQFko2
 R3
 !s105 tb_pipeline_sv_unit
 S1
 R0
-w1778011732
+w1779054536
 8tb_pipeline.sv
 Ftb_pipeline.sv
 L0 7
@@ -313,11 +361,11 @@ R4
 r1
 !s85 0
 31
-!s108 1778011736.000000
-!s107 tb_pipeline.sv|rtl\pipeline\core_pipeline.sv|rtl\pipeline\hazard_unit.sv|rtl\decoder.sv|rtl\imm_gen.sv|rtl\dmem.sv|rtl\imem.sv|rtl\regfile.sv|rtl\alu.sv|
-!s90 +define+SIMULATION|rtl\alu.sv|rtl\regfile.sv|rtl\imem.sv|rtl\dmem.sv|rtl\imm_gen.sv|rtl\decoder.sv|rtl\pipeline\hazard_unit.sv|rtl\pipeline\core_pipeline.sv|tb_pipeline.sv|
+!s108 1779054546.000000
+!s107 tb_pipeline.sv|rtl\pipeline\core_pipeline.sv|rtl\pipeline\hazard_unit.sv|rtl\imem.sv|rtl\dmem.sv|rtl\decoder.sv|rtl\imm_gen.sv|rtl\regfile.sv|rtl\alu.sv|
+!s90 -sv|rtl\alu.sv|rtl\regfile.sv|rtl\imm_gen.sv|rtl\decoder.sv|rtl\dmem.sv|rtl\imem.sv|rtl\pipeline\hazard_unit.sv|rtl\pipeline\core_pipeline.sv|tb_pipeline.sv|
 !i113 1
-!s92 +define+SIMULATION
+o-sv
 R8
 vtb_units
 R1

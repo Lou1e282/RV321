@@ -15,6 +15,7 @@ module tb_pipeline;
 
     core_pipeline dut (.clk(clk), .rst_n(rst_n));
 
+    ///////////////////////////////////////////////////////////////
     // Waveform aliases: keep key pipeline/debug signals visible at tb top level.
     logic [31:0] if_pc;
     logic [31:0] if_instr;
@@ -150,7 +151,10 @@ module tb_pipeline;
     assign rf_x6_should_stay_zero        = dut.u_rf.regs[6];
     assign rf_x7_should_stay_zero        = dut.u_rf.regs[7];
     assign rf_x8_pass_value              = dut.u_rf.regs[8];
-    assign dmem_pass_sentinel            = dut.u_dmem.mem[0];
+    assign dmem_pass_sentinel            = {dut.u_dmem.mem[3], dut.u_dmem.mem[2],
+                                            dut.u_dmem.mem[1], dut.u_dmem.mem[0]};
+
+    ///////////////////////////////////////////////////////////////
 
     initial clk = 1'b0;
     always #5 clk = ~clk;
@@ -235,9 +239,33 @@ module tb_pipeline;
     endtask
 
     task automatic clear_memories;
-        for (int i = 0; i < 256; i++) begin
-            dut.u_imem.mem[i] = 32'h0000_0013; // addi x0, x0, 0
-            dut.u_dmem.mem[i] = 32'h0000_0000;
+        for (int i = 0; i < 1024; i++) begin
+            dut.u_imem.mem[i] = 8'h00;
+        end
+        for (int i = 0; i < 1024; i++) begin
+            dut.u_dmem.mem[i] = 8'h00;
+        end
+    endtask
+
+    task automatic write_instr(input int word_index, input logic [31:0] instr);
+        int byte_index;
+        begin
+            byte_index = word_index * 4;
+            dut.u_imem.mem[byte_index + 0] = instr[7:0];
+            dut.u_imem.mem[byte_index + 1] = instr[15:8];
+            dut.u_imem.mem[byte_index + 2] = instr[23:16];
+            dut.u_imem.mem[byte_index + 3] = instr[31:24];
+        end
+    endtask
+
+    task automatic write_dword(input int word_index, input logic [31:0] data);
+        int byte_index;
+        begin
+            byte_index = word_index * 4;
+            dut.u_dmem.mem[byte_index + 0] = data[7:0];
+            dut.u_dmem.mem[byte_index + 1] = data[15:8];
+            dut.u_dmem.mem[byte_index + 2] = data[23:16];
+            dut.u_dmem.mem[byte_index + 3] = data[31:24];
         end
     endtask
 
@@ -245,7 +273,7 @@ module tb_pipeline;
         clear_memories();
 
         // Data word consumed by the load-use pair.
-        dut.u_dmem.mem[1] = 32'd7;
+        write_dword(1, 32'd7);
 
         //  PC  Instruction              Purpose
         //   0  addi x1, x0, 4           x1 = address of dmem[1]
@@ -258,16 +286,16 @@ module tb_pipeline;
         //  28  addi x7, x0, 99          must be flushed
         //  32  addi x8, x0, 1           PASS value
         //  36  sw   x8, 0(x0)           store-data forwarding -> dmem[0] = 1
-        dut.u_imem.mem[0] = addi(5'd1, 5'd0, 12'd4);
-        dut.u_imem.mem[1] = lw  (5'd2, 5'd1, 12'd0);
-        dut.u_imem.mem[2] = add (5'd3, 5'd2, 5'd2);
-        dut.u_imem.mem[3] = addi(5'd4, 5'd3, 12'd1);
-        dut.u_imem.mem[4] = add (5'd5, 5'd4, 5'd3);
-        dut.u_imem.mem[5] = beq (5'd5, 5'd5, 13'd12);
-        dut.u_imem.mem[6] = addi(5'd6, 5'd0, 12'd99);
-        dut.u_imem.mem[7] = addi(5'd7, 5'd0, 12'd99);
-        dut.u_imem.mem[8] = addi(5'd8, 5'd0, 12'd1);
-        dut.u_imem.mem[9] = sw  (5'd8, 5'd0, 12'd0);
+        write_instr(0, addi(5'd1, 5'd0, 12'd4));
+        write_instr(1, lw  (5'd2, 5'd1, 12'd0));
+        write_instr(2, add (5'd3, 5'd2, 5'd2));
+        write_instr(3, addi(5'd4, 5'd3, 12'd1));
+        write_instr(4, add (5'd5, 5'd4, 5'd3));
+        write_instr(5, beq (5'd5, 5'd5, 13'd12));
+        write_instr(6, addi(5'd6, 5'd0, 12'd99));
+        write_instr(7, addi(5'd7, 5'd0, 12'd99));
+        write_instr(8, addi(5'd8, 5'd0, 12'd1));
+        write_instr(9, sw  (5'd8, 5'd0, 12'd0));
     endtask
 
     task automatic reset_dut;
